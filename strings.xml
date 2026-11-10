@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cast Roku Web</string>
+    <string name="settings_title">Configurar Roku</string>
+    <string name="url_hint">Pesquisar ou digitar endereco</string>
+    <string name="detected_videos">Videos detectados</string>
+    <string name="cast_current_page">Transmitir esta pagina</string>
+    <string name="no_videos_found">Nenhum video detectado ainda nesta pagina.</string>
+</resources>

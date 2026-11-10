@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IP da Roku (canal Cast Roku Web)"
+        android:textColor="@color/accent_teal"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="16dp"
+        android:text="Digite o IP da Roku que esta rodando o canal companheiro (Configuracoes &gt; Rede &gt; Sobre, na TV). O app vai mandar os links de video pra ele."
+        android:textColor="@color/text_muted"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/editIp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="192.168.0.50"
+        android:inputType="textUri"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/text_muted"
+        android:background="@color/panel_dark"
+        android:padding="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Porta (padrao 8065)"
+        android:textColor="@color/text_muted"
+        android:textSize="13sp" />
+
+    <EditText
+        android:id="@+id/editPort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="8065"
+        android:inputType="number"
+        android:textColor="@color/text_white"
+        android:textColorHint="@color/text_muted"
+        android:background="@color/panel_dark"
+        android:padding="12dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Salvar"
+        android:backgroundTint="@color/accent_teal"
+        android:textColor="@color/bg_dark" />
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_muted"
+        android:textSize="13sp" />
+
+</LinearLayout>

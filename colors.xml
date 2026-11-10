@@ -1,0 +1,7 @@
+<resources>
+    <color name="bg_dark">#0A0A14</color>
+    <color name="panel_dark">#12122A</color>
+    <color name="accent_teal">#00FFCC</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_muted">#888888</color>
+</resources>
