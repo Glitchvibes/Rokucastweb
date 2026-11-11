@@ -9,25 +9,42 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="IP da Roku (canal Cast Roku Web)"
+        android:text="TV Roku"
         android:textColor="@color/accent_teal"
         android:textStyle="bold"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:layout_marginBottom="16dp"
-        android:text="Digite o IP da Roku que esta rodando o canal companheiro (Configuracoes &gt; Rede &gt; Sobre, na TV). O app vai mandar os links de video pra ele."
+        android:layout_marginBottom="14dp"
+        android:text="Deixe o canal Cast Roku Web aberto na TV. O app procura automaticamente o aparelho na rede."
         android:textColor="@color/text_muted"
         android:textSize="13sp" />
+
+    <Button
+        android:id="@+id/btnDiscover"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BUSCAR TV ROKU"
+        android:backgroundTint="@color/accent_teal"
+        android:textColor="@color/bg_dark" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="IP (opcional, configuração manual)"
+        android:textColor="@color/accent_teal"
+        android:textStyle="bold"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/editIp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="192.168.0.50"
+        android:hint="192.168.1.104"
         android:inputType="textUri"
         android:textColor="@color/text_white"
         android:textColorHint="@color/text_muted"
@@ -38,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Porta (padrao 8065)"
+        android:text="Porta (padrão 8065)"
         android:textColor="@color/text_muted"
         android:textSize="13sp" />
 
@@ -57,8 +74,8 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Salvar"
+        android:layout_marginTop="18dp"
+        android:text="Salvar manualmente"
         android:backgroundTint="@color/accent_teal"
         android:textColor="@color/bg_dark" />
 
@@ -69,5 +86,4 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/text_muted"
         android:textSize="13sp" />
-
 </LinearLayout>
