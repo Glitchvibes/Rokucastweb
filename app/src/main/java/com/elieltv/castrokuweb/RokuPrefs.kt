@@ -19,7 +19,14 @@ object RokuPrefs {
 
     fun getPort(context: Context): Int {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return prefs.getInt(KEY_PORT, DEFAULT_PORT)
+        val savedPort = prefs.getInt(KEY_PORT, DEFAULT_PORT)
+        // Versões anteriores salvavam 8065, mas o CastClient atual e o canal v1.2
+        // usam o ECP padrão da Roku na porta 8060.
+        if (savedPort == 8065) {
+            prefs.edit().putInt(KEY_PORT, DEFAULT_PORT).apply()
+            return DEFAULT_PORT
+        }
+        return savedPort
     }
 
     fun save(context: Context, ip: String, port: Int) {
