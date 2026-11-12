@@ -43,8 +43,8 @@ class SettingsActivity : AppCompatActivity() {
                             .setItems(labels) { _, which ->
                                 val device = devices[which]
                                 editIp.setText(device.ip)
-                                editPort.setText("8065")
-                                RokuPrefs.save(this, device.ip, 8065)
+                                editPort.setText("8060")
+                                RokuPrefs.save(this, device.ip, 8060)
                                 statusText.text = "TV selecionada: ${device.name} (${device.ip})"
                             }.setNegativeButton("Cancelar", null).show()
                     }
@@ -54,7 +54,7 @@ class SettingsActivity : AppCompatActivity() {
 
         btnSave.setOnClickListener {
             val ip = editIp.text.toString().trim()
-            val port = editPort.text.toString().trim().toIntOrNull() ?: 8065
+            val port = editPort.text.toString().trim().toIntOrNull() ?: 8060
             val cloudUrl = editCloudUrl.text.toString().trim()
             val cloudToken = editCloudToken.text.toString().trim()
             if (ip.isNotBlank() && port !in 1..65535) {
