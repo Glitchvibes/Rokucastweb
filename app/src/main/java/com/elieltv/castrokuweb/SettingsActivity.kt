@@ -14,15 +14,19 @@ class SettingsActivity : AppCompatActivity() {
 
         val editIp = findViewById<EditText>(R.id.editIp)
         val editPort = findViewById<EditText>(R.id.editPort)
+        val editCloudUrl = findViewById<EditText>(R.id.editCloudUrl)
+        val editCloudToken = findViewById<EditText>(R.id.editCloudToken)
         val statusText = findViewById<TextView>(R.id.statusText)
         val btnSave = findViewById<android.widget.Button>(R.id.btnSave)
         val btnDiscover = findViewById<android.widget.Button>(R.id.btnDiscover)
 
         editIp.setText(RokuPrefs.getIp(this))
         editPort.setText(RokuPrefs.getPort(this).toString())
+        editCloudUrl.setText(CloudPrefs.getUrl(this))
+        editCloudToken.setText(CloudPrefs.getToken(this))
         statusText.text = if (RokuPrefs.isConfigured(this))
-            "Configurado: ${RokuPrefs.getIp(this)}:${RokuPrefs.getPort(this)}"
-        else "Ainda não configurado. Abra o canal Cast Roku Web na TV e toque em Buscar TV."
+            "Roku: ${RokuPrefs.getIp(this)}:${RokuPrefs.getPort(this)}"
+        else "Abra o canal na TV e toque em Buscar TV Roku."
 
         btnDiscover.setOnClickListener {
             btnDiscover.isEnabled = false
@@ -31,22 +35,18 @@ class SettingsActivity : AppCompatActivity() {
                 runOnUiThread {
                     btnDiscover.isEnabled = true
                     if (devices.isEmpty()) {
-                        statusText.text = "Nenhum canal Cast Roku Web encontrado. Confirme que o canal está aberto e que celular e Roku estão na mesma rede Wi-Fi."
+                        statusText.text = "Nenhum canal Cast Roku Web encontrado. Verifique se ambos estão na mesma rede Wi-Fi."
                         Toast.makeText(this, "Nenhuma TV com o canal aberto foi encontrada.", Toast.LENGTH_LONG).show()
                     } else {
                         val labels = devices.map { "${it.name}  •  ${it.ip}" }.toTypedArray()
-                        AlertDialog.Builder(this)
-                            .setTitle("Selecione sua TV Roku")
+                        AlertDialog.Builder(this).setTitle("Selecione sua TV Roku")
                             .setItems(labels) { _, which ->
                                 val device = devices[which]
                                 editIp.setText(device.ip)
                                 editPort.setText("8065")
                                 RokuPrefs.save(this, device.ip, 8065)
-                                statusText.text = "Conectado à TV: ${device.name} (${device.ip}:8065)"
-                                Toast.makeText(this, "TV encontrada e selecionada.", Toast.LENGTH_SHORT).show()
-                            }
-                            .setNegativeButton("Cancelar", null)
-                            .show()
+                                statusText.text = "TV selecionada: ${device.name} (${device.ip})"
+                            }.setNegativeButton("Cancelar", null).show()
                     }
                 }
             }
@@ -55,13 +55,24 @@ class SettingsActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val ip = editIp.text.toString().trim()
             val port = editPort.text.toString().trim().toIntOrNull() ?: 8065
-            if (ip.isBlank() || port !in 1..65535) {
-                Toast.makeText(this, "Informe um IP e uma porta válidos.", Toast.LENGTH_SHORT).show()
+            val cloudUrl = editCloudUrl.text.toString().trim()
+            val cloudToken = editCloudToken.text.toString().trim()
+            if (ip.isNotBlank() && port !in 1..65535) {
+                Toast.makeText(this, "Porta inválida.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            RokuPrefs.save(this, ip, port)
-            statusText.text = "Salvo: $ip:$port"
-            Toast.makeText(this, "Configuração salva.", Toast.LENGTH_SHORT).show()
+            if (cloudUrl.isNotBlank() && !cloudUrl.startsWith("https://")) {
+                Toast.makeText(this, "Use o endereço HTTPS público do servidor cloud.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (cloudUrl.isNotBlank() && cloudToken.isBlank()) {
+                Toast.makeText(this, "Informe o token privado do serviço cloud.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            if (ip.isNotBlank()) RokuPrefs.save(this, ip, port)
+            CloudPrefs.save(this, cloudUrl, cloudToken)
+            statusText.text = "Configurações salvas."
+            Toast.makeText(this, "Configurações salvas.", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
