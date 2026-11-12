@@ -3,13 +3,14 @@ package com.elieltv.castrokuweb
 import android.content.Context
 
 /**
- * Guarda o IP/porta do canal "Cast Roku Web" companheiro, salvo localmente no aparelho.
+ * Guarda o IP/porta do canal "Cast Roku Web", salvo localmente no aparelho.
+ * O canal companheiro v1.2 recebe comandos pelo ECP padrão da Roku (8060).
  */
 object RokuPrefs {
     private const val PREFS_NAME = "cast_roku_web_prefs"
     private const val KEY_IP = "roku_ip"
     private const val KEY_PORT = "roku_port"
-    private const val DEFAULT_PORT = 8065
+    private const val DEFAULT_PORT = 8060
 
     fun getIp(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
