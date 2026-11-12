@@ -8,7 +8,8 @@
     <androidx.recyclerview.widget.RecyclerView android:id="@+id/videoList"
         android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
     <CheckBox android:id="@+id/checkAiUpscale" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="AI UPSCALE NA NUVEM (2x) — Real-ESRGAN"
+        android:layout_height="wrap_content" android:text="AI UPSCALE LOCAL (2x) — em integração"
+        android:enabled="false" android:checked="false"
         android:textColor="@color/text_white" android:buttonTint="@color/accent_teal" android:padding="8dp" />
     <Button android:id="@+id/btnCastCurrentPage" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_marginTop="8dp"
