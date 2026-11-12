@@ -1,0 +1,20 @@
+services:
+  cast-upscale:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      CAST_UPSCALE_API_TOKEN: ${CAST_UPSCALE_API_TOKEN:?Set a strong token in .env}
+      MAX_VIDEO_BYTES: 2147483648
+      MAX_VIDEO_SECONDS: 1800
+    volumes:
+      - ./data:/workspace/inputs
+      - ./results:/workspace/outputs
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
