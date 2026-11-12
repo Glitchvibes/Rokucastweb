@@ -15,6 +15,8 @@ class SettingsActivity : AppCompatActivity() {
         val editIp = findViewById<EditText>(R.id.editIp)
         val editPort = findViewById<EditText>(R.id.editPort)
         val statusText = findViewById<TextView>(R.id.statusText)
+        val checkBlockAds = findViewById<android.widget.CheckBox>(R.id.checkBlockAds)
+        checkBlockAds.isChecked = AdBlockPrefs.isEnabled(this)
         val btnSave = findViewById<android.widget.Button>(R.id.btnSave)
         val btnDiscover = findViewById<android.widget.Button>(R.id.btnDiscover)
 
@@ -56,6 +58,7 @@ class SettingsActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (ip.isNotBlank()) RokuPrefs.save(this, ip, port)
+            AdBlockPrefs.setEnabled(this, checkBlockAds.isChecked)
             statusText.text = "Configurações salvas."
             Toast.makeText(this, "Configurações salvas.", Toast.LENGTH_SHORT).show()
             finish()
