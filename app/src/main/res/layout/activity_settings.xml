@@ -27,6 +27,13 @@
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
         android:text="A configuração de servidor e token foi removida. O processamento Real-ESRGAN local está em integração e será ativado quando o motor nativo estiver pronto. A transmissão normal para Roku continua disponível."
         android:textColor="@color/text_muted" android:textSize="13sp" />
+    <CheckBox android:id="@+id/checkBlockAds" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="20dp"
+        android:text="Bloquear anúncios de páginas e pop-ups"
+        android:textColor="@color/text_white" android:buttonTint="@color/accent_teal" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="O filtro bloqueia domínios publicitários conhecidos. Anúncios dentro do próprio vídeo podem continuar aparecendo."
+        android:textColor="@color/text_muted" android:textSize="12sp" />
     <Button android:id="@+id/btnSave" android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_marginTop="18dp" android:text="SALVAR CONFIGURAÇÕES"
         android:backgroundTint="@color/accent_teal" android:textColor="@color/bg_dark" />
