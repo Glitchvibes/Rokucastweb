@@ -43,7 +43,7 @@ def safe_source(url):
         raise HTTPException(400, "Não foi possível resolver o host do vídeo.")
 
 def run_job(job_id, req):
-    src = INPUTS / f"{job_id}.source"
+    src = INPUTS / f"{job_id}.mp4"
     out_dir = OUTPUTS / job_id
     out_dir.mkdir(parents=True, exist_ok=True)
     output = out_dir / "upscaled.mp4"
