@@ -14,16 +14,12 @@ class SettingsActivity : AppCompatActivity() {
 
         val editIp = findViewById<EditText>(R.id.editIp)
         val editPort = findViewById<EditText>(R.id.editPort)
-        val editCloudUrl = findViewById<EditText>(R.id.editCloudUrl)
-        val editCloudToken = findViewById<EditText>(R.id.editCloudToken)
         val statusText = findViewById<TextView>(R.id.statusText)
         val btnSave = findViewById<android.widget.Button>(R.id.btnSave)
         val btnDiscover = findViewById<android.widget.Button>(R.id.btnDiscover)
 
         editIp.setText(RokuPrefs.getIp(this))
         editPort.setText(RokuPrefs.getPort(this).toString())
-        editCloudUrl.setText(CloudPrefs.getUrl(this))
-        editCloudToken.setText(CloudPrefs.getToken(this))
         statusText.text = if (RokuPrefs.isConfigured(this))
             "Roku: ${RokuPrefs.getIp(this)}:${RokuPrefs.getPort(this)}"
         else "Abra o canal na TV e toque em Buscar TV Roku."
@@ -55,22 +51,11 @@ class SettingsActivity : AppCompatActivity() {
         btnSave.setOnClickListener {
             val ip = editIp.text.toString().trim()
             val port = editPort.text.toString().trim().toIntOrNull() ?: 8060
-            val cloudUrl = editCloudUrl.text.toString().trim()
-            val cloudToken = editCloudToken.text.toString().trim()
             if (ip.isNotBlank() && port !in 1..65535) {
                 Toast.makeText(this, "Porta inválida.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (cloudUrl.isNotBlank() && !cloudUrl.startsWith("https://")) {
-                Toast.makeText(this, "Use o endereço HTTPS público do servidor cloud.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-            if (cloudUrl.isNotBlank() && cloudToken.isBlank()) {
-                Toast.makeText(this, "Informe o token privado do serviço cloud.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
             if (ip.isNotBlank()) RokuPrefs.save(this, ip, port)
-            CloudPrefs.save(this, cloudUrl, cloudToken)
             statusText.text = "Configurações salvas."
             Toast.makeText(this, "Configurações salvas.", Toast.LENGTH_SHORT).show()
             finish()
