@@ -99,11 +99,12 @@ class MainActivity : AppCompatActivity() {
                 request: WebResourceRequest?
             ): WebResourceResponse? {
                 val url = request?.url?.toString()
+                if (url != null && AdBlockPrefs.isEnabled(this@MainActivity) && AdBlocker.shouldBlock(url)) {
+                    return AdBlocker.emptyResponse()
+                }
                 if (url != null && VideoDetector.looksLikeVideo(url)) {
                     mainHandler.post { addDetectedVideo(url, webView.title ?: "") }
                 }
-                // sempre retorna null: deixa a requisicao seguir normalmente,
-                // so estamos observando, nunca bloqueando nada
                 return super.shouldInterceptRequest(view, request)
             }
 
@@ -119,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 swipeRefresh.isRefreshing = false
                 // segunda tecnica de deteccao: varre o DOM da pagina principal
                 webView.evaluateJavascript(VideoDetector.SCAN_SCRIPT, null)
+                webView.evaluateJavascript(PlaybackResume.SCRIPT, null)
             }
         }
 
