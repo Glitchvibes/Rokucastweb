@@ -1,89 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bg_dark"
-    android:padding="20dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TV Roku"
-        android:textColor="@color/accent_teal"
-        android:textStyle="bold"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="14dp"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="20dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="TV Roku" android:textColor="@color/accent_teal" android:textStyle="bold" android:textSize="18sp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="6dp" android:layout_marginBottom="14dp"
         android:text="Deixe o canal Cast Roku Web aberto na TV. O app procura automaticamente o aparelho na rede."
-        android:textColor="@color/text_muted"
-        android:textSize="13sp" />
-
-    <Button
-        android:id="@+id/btnDiscover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BUSCAR TV ROKU"
-        android:backgroundTint="@color/accent_teal"
-        android:textColor="@color/bg_dark" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="IP (opcional, configuração manual)"
-        android:textColor="@color/accent_teal"
-        android:textStyle="bold"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/editIp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="192.168.1.104"
-        android:inputType="textUri"
-        android:textColor="@color/text_white"
-        android:textColorHint="@color/text_muted"
-        android:background="@color/panel_dark"
-        android:padding="12dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Porta (padrão 8065)"
-        android:textColor="@color/text_muted"
-        android:textSize="13sp" />
-
-    <EditText
-        android:id="@+id/editPort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="8065"
-        android:inputType="number"
-        android:textColor="@color/text_white"
-        android:textColorHint="@color/text_muted"
-        android:background="@color/panel_dark"
-        android:padding="12dp" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="Salvar manualmente"
-        android:backgroundTint="@color/accent_teal"
-        android:textColor="@color/bg_dark" />
-
-    <TextView
-        android:id="@+id/statusText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/text_muted"
-        android:textSize="13sp" />
+        android:textColor="@color/text_muted" android:textSize="13sp" />
+    <Button android:id="@+id/btnDiscover" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="BUSCAR TV ROKU" android:backgroundTint="@color/accent_teal" android:textColor="@color/bg_dark" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp"
+        android:text="IP (opcional, configuração manual)" android:textColor="@color/accent_teal" android:textStyle="bold" android:textSize="14sp" />
+    <EditText android:id="@+id/editIp" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="192.168.1.104" android:inputType="textUri" android:textColor="@color/text_white"
+        android:textColorHint="@color/text_muted" android:background="@color/panel_dark" android:padding="12dp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp"
+        android:text="Porta (padrão 8065)" android:textColor="@color/text_muted" android:textSize="13sp" />
+    <EditText android:id="@+id/editPort" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:hint="8065" android:inputType="number" android:textColor="@color/text_white"
+        android:textColorHint="@color/text_muted" android:background="@color/panel_dark" android:padding="12dp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp"
+        android:text="REAL-ESRGAN — PROCESSAMENTO CLOUD" android:textColor="@color/accent_teal" android:textStyle="bold" android:textSize="16sp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp"
+        android:text="Informe a URL HTTPS do servidor GPU e o token configurado nele."
+        android:textColor="@color/text_muted" android:textSize="13sp" />
+    <EditText android:id="@+id/editCloudUrl" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" android:hint="https://seu-servidor.com" android:inputType="textUri"
+        android:textColor="@color/text_white" android:textColorHint="@color/text_muted"
+        android:background="@color/panel_dark" android:padding="12dp" />
+    <EditText android:id="@+id/editCloudToken" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:hint="Token privado do serviço" android:inputType="textPassword"
+        android:textColor="@color/text_white" android:textColorHint="@color/text_muted"
+        android:background="@color/panel_dark" android:padding="12dp" />
+    <Button android:id="@+id/btnSave" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="18dp" android:text="SALVAR CONFIGURAÇÕES"
+        android:backgroundTint="@color/accent_teal" android:textColor="@color/bg_dark" />
+    <TextView android:id="@+id/statusText" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:textColor="@color/text_muted" android:textSize="13sp" />
 </LinearLayout>
+</ScrollView>
