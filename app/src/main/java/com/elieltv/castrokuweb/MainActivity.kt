@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var fabVideos: FloatingActionButton
     private lateinit var badgeCount: TextView
+    private var customView: View? = null
+    private var customViewCallback: WebChromeClient.CustomViewCallback? = null
 
     // Guarda os videos detectados na pagina atual, sem duplicatas (por URL).
     private val detectedVideos = LinkedHashMap<String, DetectedVideo>()
@@ -79,6 +81,27 @@ class MainActivity : AppCompatActivity() {
         )
 
         webView.webChromeClient = object : WebChromeClient() {
+            override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+                if (view == null) return
+                if (customView != null) { callback?.onCustomViewHidden(); return }
+                customView = view
+                customViewCallback = callback
+                (window.decorView as android.widget.FrameLayout).addView(view,
+                    android.widget.FrameLayout.LayoutParams(-1, -1))
+                window.addFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN or
+                    android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+
+            override fun onHideCustomView() {
+                val view = customView ?: return
+                (window.decorView as android.widget.FrameLayout).removeView(view)
+                customView = null
+                customViewCallback?.onCustomViewHidden()
+                customViewCallback = null
+                window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN or
+                    android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 progressBar.visibility = if (newProgress in 1..99) View.VISIBLE else View.GONE
                 progressBar.progress = newProgress
@@ -136,6 +159,13 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.btnReload).setOnClickListener {
             webView.reload()
+        }
+        findViewById<ImageButton>(R.id.btnRemote).setOnClickListener {
+            if (!RokuPrefs.isConfigured(this)) {
+                Toast.makeText(this, "Configure a TV Roku primeiro.", Toast.LENGTH_SHORT).show()
+            } else {
+                RokuRemoteDialog(this).show()
+            }
         }
         findViewById<ImageButton>(R.id.btnSettings).setOnClickListener {
             startActivity(android.content.Intent(this, SettingsActivity::class.java))
@@ -198,7 +228,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
+        if (customView != null) {
+            (webView.webChromeClient as? WebChromeClient)?.onHideCustomView()
+        } else if (webView.canGoBack()) {
             webView.goBack()
         } else {
             super.onBackPressed()
