@@ -19,7 +19,7 @@ object RokuRemoteClient {
     private val main = Handler(Looper.getMainLooper())
 
     fun key(ip: String, key: String, callback: (Boolean, String?) -> Unit = { _, _ -> }) {
-        request(ip, "POST", "/keypress/$key") { code, error ->
+        request(ip, "POST", "/keypress/$key") { code, error, _ ->
             main.post { callback(code in 200..299, error ?: if (code !in 200..299) "Roku respondeu $code" else null) }
         }
     }
